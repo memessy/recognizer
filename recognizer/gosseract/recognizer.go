@@ -2,6 +2,7 @@ package gosseract
 
 import (
 	"github.com/otiai10/gosseract"
+	"memery-recognizer/recognizer"
 	"sync"
 )
 
@@ -10,10 +11,10 @@ type Recognizer struct {
 	mux    sync.Mutex
 }
 
-func NewRecognizer() Recognizer {
+func NewRecognizer() recognizer.Recognizer {
 	client := gosseract.NewClient()
 	_ = client.SetLanguage("rus", "eng")
-	return Recognizer{
+	return &Recognizer{
 		client: client,
 		mux:    sync.Mutex{},
 	}

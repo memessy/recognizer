@@ -5,12 +5,12 @@ import (
 	"fmt"
 	"github.com/rs/zerolog/log"
 	"io/ioutil"
-	"memery-recognizer/recognizer/gosseract"
+	"memery-recognizer/recognizer"
 	"net/http"
 )
 
 type Controller struct {
-	RecognizerFactory func() gosseract.Recognizer
+	RecognizerFactory func() recognizer.Recognizer
 	AuthToken         string
 }
 
