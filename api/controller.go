@@ -11,7 +11,6 @@ import (
 
 type Controller struct {
 	RecognizerFactory func() recognizer.Recognizer
-	AuthToken         string
 }
 
 const (
@@ -28,13 +27,6 @@ type SuccessResponse struct {
 }
 
 func (c *Controller) Upload(rw http.ResponseWriter, r *http.Request) {
-	authToken := r.Header.Get("token")
-	if authToken != c.AuthToken {
-		log.Warn().Msg("unauthorized access")
-		rw.WriteHeader(http.StatusUnauthorized)
-		return
-	}
-
 	responseInvalidInput := func(err error, message string) {
 		rw.WriteHeader(http.StatusUnprocessableEntity)
 		log.Warn().Err(err).Msg("got error while getting user input")

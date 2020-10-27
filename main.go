@@ -11,11 +11,10 @@ import (
 )
 
 func main() {
-	authToken := os.Getenv("AUTH_TOKEN")
 	port := os.Getenv("PORT")
 	r := chi.NewRouter()
 	r.Use(middleware.Logger)
-	controller := api.Controller{RecognizerFactory: gosseract.NewRecognizer, AuthToken: authToken}
+	controller := api.Controller{RecognizerFactory: gosseract.NewRecognizer}
 	r.Post("/recognize", controller.Upload)
-	log.Fatal(http.ListenAndServe(":" + port, r))
+	log.Fatal(http.ListenAndServe(":"+port, r))
 }
