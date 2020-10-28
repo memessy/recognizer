@@ -6,6 +6,7 @@ import (
 	"github.com/go-chi/chi/middleware"
 	"github.com/rs/zerolog/log"
 	api "memery-recognizer/api/impl"
+	"memery-recognizer/api/impl/multipart"
 	pool "memery-recognizer/pool/impl"
 	recognizer "memery-recognizer/recognizer/gosseract"
 	"net/http"
@@ -26,11 +27,11 @@ func main() {
 	ctx := context.Background()
 	ctx, cancel := context.WithCancel(ctx)
 	defer cancel()
+	multipartReader := multipart.NewReader(fileKey, int64(fileMaxSize))
 	p := pool.NewPool(ctx, runtime.NumCPU()-1, recognizer.NewRecognizer)
 	controller := api.Controller{
-		Pool:    p,
-		MaxSize: int64(fileMaxSize),
-		FileKey: fileKey,
+		Pool:            p,
+		MultipartReader: multipartReader,
 	}
 	r.Post("/recognize", controller.Upload)
 	log.Fatal().Err(http.ListenAndServe(":"+port, r))
