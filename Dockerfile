@@ -10,7 +10,9 @@ RUN go build -o /out/recognizer .
 FROM debian:buster-slim as runner
 
 ENV PORT=8000
-ENV AUTH_TOKEN=''
+ENV FILE_KEY=file
+ENV FILE_MAX_SIZE=10000000
+
 ENV TESSDATA_PREFIX=/usr/share/tesseract-ocr/4.00/tessdata/
 RUN apt-get update -qq \
     && apt-get install -y -qq \
