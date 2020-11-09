@@ -2,7 +2,7 @@ package gosseract
 
 import (
 	"github.com/otiai10/gosseract"
-	"memery-recognizer/recognizer"
+	"memessy-recognizer/pkg/recognizer"
 	"sync"
 )
 

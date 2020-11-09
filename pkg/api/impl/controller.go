@@ -3,8 +3,8 @@ package api
 import (
 	"encoding/json"
 	"github.com/rs/zerolog/log"
-	"memery-recognizer/api/impl/multipart"
-	"memery-recognizer/pool"
+	"memessy-recognizer/pkg/api/impl/multipart"
+	"memessy-recognizer/pkg/pool"
 	"net/http"
 )
 
